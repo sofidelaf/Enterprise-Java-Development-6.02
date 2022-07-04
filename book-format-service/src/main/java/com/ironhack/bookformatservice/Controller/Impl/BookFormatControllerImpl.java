@@ -1,18 +1,30 @@
 package com.ironhack.bookformatservice.Controller.Impl;
 
+import com.ironhack.bookformatservice.Classes.BookFormat;
 import com.ironhack.bookformatservice.Controller.Interfaces.BookFormatController;
 import com.ironhack.bookformatservice.Enum.Format;
+import com.ironhack.bookformatservice.Repository.BookFormatRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 public class BookFormatControllerImpl implements BookFormatController {
-    @GetMapping("/book-formats")
+    @Autowired
+    private BookFormatRepository bookFormatRepository;
+    @GetMapping("/book-formats/{ISBN}")
     @ResponseStatus(HttpStatus.OK)
-    public Format getBookFormat(@PathVariable(name = "ISBN") long ISBN) {
-        return Format.AUDIO;
+    public String getBookFormat(@PathVariable(name = "ISBN") long ISBN) {
+        Optional<BookFormat> bookFormat = bookFormatRepository.findById(ISBN);
+        return bookFormat.get().getFormat().toString();
+    }
+
+    @PostMapping("/book-formats")
+    @ResponseStatus(HttpStatus.CREATED)
+    public BookFormat postBookFormat(@RequestBody @Valid BookFormat bookFormat) {
+        return bookFormatRepository.save(bookFormat);
     }
 }

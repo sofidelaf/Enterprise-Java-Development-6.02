@@ -1,27 +1,21 @@
-package com.ironhack.bookservice.Classes;
+package com.ironhack.bookservice.Controller.DTO;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
-public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class BookDTO {
     private Long ISBN;
     private String title;
     private String author;
     private String genre;
+    private String format;
 
-    public Book() {
-    }
-
-    public Book(Long ISBN, String title, String author, String genre) {
+    public BookDTO(Long ISBN, String title, String author, String genre, String format) {
         this.ISBN = ISBN;
         this.title = title;
         this.author = author;
         this.genre = genre;
+        this.format = format;
+    }
+
+    public BookDTO() {
     }
 
     public Long getISBN() {
@@ -54,5 +48,13 @@ public class Book {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
     }
 }
