@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
+import javax.validation.Valid;
 
 @RestController
 public class BookControllerImpl implements BookController {
