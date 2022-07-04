@@ -1,6 +1,11 @@
 package com.ironhack.bookservice.Classes;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Book {
+    @Id
     private Long ISBN;
     private String title;
     private String author;
